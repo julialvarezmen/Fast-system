@@ -1,6 +1,6 @@
-package com.restaurante.app.infrastructure.persistence.repository;
+package com.restaurante.backend.infrastructure.persistence.repository;
 
-import com.restaurante.app.infrastructure.persistence.entity.ProductEntity;
+import com.restaurante.backend.infrastructure.persistence.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

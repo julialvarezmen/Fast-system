@@ -1,8 +1,8 @@
-package com.restaurante.app.api.controller;
+package com.restaurante.backend.controller;
 
-import com.restaurante.app.application.dto.OrderRequest;
-import com.restaurante.app.application.dto.OrderResponse;
-import com.restaurante.app.application.service.OrderService;
+import com.restaurante.backend.application.dto.OrderRequest;
+import com.restaurante.backend.application.dto.OrderResponse;
+import com.restaurante.backend.application.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +21,14 @@ public class OrderController {
     // Crear un pedido (cliente)
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request) {
-        OrderResponse response = orderService.createOrder(request);
+        OrderResponse response = orderService.createOrden(request);
         return ResponseEntity.ok(response);
     }
 
     // Obtener todos los pedidos (admin)
     @GetMapping
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
-        return ResponseEntity.ok(orderService.getAllOrders());
+        return ResponseEntity.ok(orderService.getAll());
     }
 
     // Obtener detalle de un pedido por ID
@@ -40,6 +40,6 @@ public class OrderController {
     // Cancelar pedido
     @PutMapping("/{id}/cancel")
     public ResponseEntity<OrderResponse> cancelOrder(@PathVariable String id) {
-        return ResponseEntity.ok(orderService.cancelOrder(id));
+        return ResponseEntity.ok(orderService.cancelarOrden(id));
     }
 }

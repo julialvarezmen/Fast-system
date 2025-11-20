@@ -1,4 +1,4 @@
-package com.restaurante.app.infrastructure.config;
+package com.restaurante.backend.infrastructure.config;
 
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.Contact;

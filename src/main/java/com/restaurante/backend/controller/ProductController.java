@@ -1,8 +1,8 @@
-package com.restaurante.app.api.controller;
+package com.restaurante.backend.controller;
 
-import com.restaurante.app.application.dto.ProductRequest;
-import com.restaurante.app.application.dto.ProductResponse;
-import com.restaurante.app.application.service.ProductService;
+import com.restaurante.backend.application.dto.ProductRequest;
+import com.restaurante.backend.application.dto.ProductResponse;
+import com.restaurante.backend.application.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

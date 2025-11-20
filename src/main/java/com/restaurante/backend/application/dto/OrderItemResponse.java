@@ -1,47 +1,47 @@
-package com.restaurante.app.application.dto;
+package com.restaurante.backend.application.dto;
 
 import java.math.BigDecimal;
 
 public class OrderItemResponse {
 
-    private String productId;
-    private String name;
-    private BigDecimal price;
-    private Integer quantity;
+    private String idProducto;
+    private String nombreProducto;
+    private BigDecimal precioProducto;
+    private Integer cantidad;
     private BigDecimal subtotal;
 
-    // Getters y Setters
+    // Getters y Setters en español
 
-    public String getProductId() {
-        return productId;
+    public String getIdProducto() {
+        return idProducto;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public String getName() {
-        return name;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPrecioProducto() {
+        return precioProducto;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrecioProducto(BigDecimal precioProducto) {
+        this.precioProducto = precioProducto;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     public BigDecimal getSubtotal() {

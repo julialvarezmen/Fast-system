@@ -1,46 +1,51 @@
-package com.restaurante.app.application.dto;
+package com.restaurante.backend.application.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 
+@Schema(name = "ProductoRequest", description = "Datos para crear o actualizar un producto")
 public class ProductRequest {
 
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private String imageUrl;
+    @Schema(description = "Nombre del producto", example = "Pizza Margarita")
+    private String nombre;
+    @Schema(description = "Descripción del producto", example = "Pizza con salsa de tomate y queso mozzarella")
+    private String descripcion;
+    @Schema(description = "Precio del producto", example = "25000")
+    private BigDecimal precio;
+    @Schema(description = "URL de la imagen del producto", example = "https://ejemplo.com/pizza.jpg")
+    private String imagenUrl;
 
     // Getters y Setters
 
     public String getName() {
-        return name;
+        return nombre;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nombre = nombre;
     }
 
     public String getDescription() {
-        return description;
+        return descripcion;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.descripcion = description;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return precio;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        this.precio = precio;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return imagenUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.imagenUrl = imagenUrl;
     }
 }
-

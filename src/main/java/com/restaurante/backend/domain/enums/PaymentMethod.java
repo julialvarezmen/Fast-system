@@ -1,4 +1,4 @@
-package com.restaurante.app.domain.enums;
+package com.restaurante.backend.domain.enums;
 
 public enum PaymentMethod {
     // Métodos de pago

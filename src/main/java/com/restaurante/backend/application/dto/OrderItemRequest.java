@@ -1,27 +1,12 @@
-package com.restaurante.app.application.dto;
-
-import java.math.BigDecimal;
+package com.restaurante.backend.application.dto;
 
 public class OrderItemRequest {
+    private String idProducto;
+    private Integer cantidad;
 
-    private String productId;
-    private Integer quantity;
-
-    // Getters y Setters
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+    // Getters y Setters en español
+    public String getIdProducto() { return idProducto; }
+    public void setIdProducto(String idProducto) { this.idProducto = idProducto; }
+    public Integer getCantidad() { return cantidad; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
 }

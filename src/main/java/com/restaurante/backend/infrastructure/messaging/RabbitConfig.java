@@ -1,4 +1,4 @@
-package com.restaurante.app.infrastructure.messaging;
+package com.restaurante.backend.infrastructure.messaging;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;

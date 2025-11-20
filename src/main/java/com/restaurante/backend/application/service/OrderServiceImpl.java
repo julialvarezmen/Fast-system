@@ -1,13 +1,15 @@
-package com.restaurante.app.application.service;
+package com.restaurante.backend.application.service;
 
-import com.restaurante.app.application.dto.OrderRequest;
-import com.restaurante.app.application.dto.OrderResponse;
-import com.restaurante.app.application.mapper.OrderMapper;
-import com.restaurante.app.infrastructure.messaging.RabbitOrderPublisher;
-import com.restaurante.app.infrastructure.persistence.entity.OrderEntity;
-import com.restaurante.app.infrastructure.persistence.entity.ProductEntity;
-import com.restaurante.app.infrastructure.persistence.repository.OrderRepository;
-import com.restaurante.app.infrastructure.persistence.repository.ProductRepository;
+import com.restaurante.backend.application.dto.OrderRequest;
+import com.restaurante.backend.application.dto.OrderResponse;
+import com.restaurante.backend.application.mapper.OrderMapper;
+import com.restaurante.backend.application.mapper.ProductMapper;
+import com.restaurante.backend.domain.model.Order;
+import com.restaurante.backend.domain.model.Product;
+import com.restaurante.backend.infrastructure.messaging.RabbitOrderPublisher;
+import com.restaurante.backend.infrastructure.persistence.entity.OrderEntity;
+import com.restaurante.backend.infrastructure.persistence.repository.OrderRepository;
+import com.restaurante.backend.infrastructure.persistence.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -16,83 +18,99 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
-    private final ProductRepository productRepository;
-    private final RabbitOrderPublisher orderPublisher;
+    private final OrderRepository repositorioOrden;
+    private final ProductRepository repositorioProducto;
+    private final RabbitOrderPublisher publicadorOrden;
 
-    public OrderServiceImpl(OrderRepository orderRepository,
-                            ProductRepository productRepository,
-                            RabbitOrderPublisher orderPublisher) {
-        this.orderRepository = orderRepository;
-        this.productRepository = productRepository;
-        this.orderPublisher = orderPublisher;
+    public OrderServiceImpl(OrderRepository repositorioOrden,
+                            ProductRepository repositorioProducto,
+                            RabbitOrderPublisher publicadorOrden) {
+        this.repositorioOrden = repositorioOrden;
+        this.repositorioProducto = repositorioProducto;
+        this.publicadorOrden = publicadorOrden;
     }
 
     @Override
-    public OrderResponse createOrder(OrderRequest request) {
+    public OrderResponse crearOrden(OrderRequest request) {
 
-        // Obtener snapshot de productos según IDs del request
-        List<String> productIds = request.getItems()
+        // 1. Obtener snapshot de productos
+        List<String> idsProductos = request.getItems()
                 .stream()
-                .map(i -> i.getProductId())
+                .map(i -> i.getIdProducto())
                 .toList();
 
-        List<ProductEntity> productSnapshot = productRepository.findAllById(productIds);
+        List<Product> productos = repositorioProducto.findAllById(idsProductos)
+                .stream()
+                .map(ProductMapper::toDomain)
+                .toList();
 
-        if (productSnapshot.size() != productIds.size()) {
+        if (productos.size() != idsProductos.size()) {
             throw new RuntimeException("Algunos productos no existen o están inactivos");
         }
 
-        // Convertimos el request en entidad Order
-        OrderEntity order = OrderMapper.toNewOrderEntity(request, productSnapshot);
+        // 2. Crear Orden (dominio)
+        Order ordenDominio = OrderMapper.toNuevaOrden(request, productos);
 
-        // Guardar en BD
-        OrderEntity saved = orderRepository.save(order);
+        // 3. Mapear dominio → entidad
+        OrderEntity entidad = OrderMapper.aEntidad(ordenDominio);
 
-        // Enviar a RabbitMQ (al worker)
-        orderPublisher.sendOrder(saved);
+        // 4. Guardar
+        OrderEntity entidadGuardada = repositorioOrden.save(entidad);
 
-        return OrderMapper.toResponse(saved);
+        // 5. Convertir entidad → dominio
+        Order ordenGuardada = OrderMapper.aDominio(entidadGuardada);
+
+        // 6. Enviar a RabbitMQ
+        publicadorOrden.sendOrder(ordenGuardada);
+
+        return OrderMapper.aRespuesta(ordenGuardada);
     }
 
-
     @Override
-    public OrderResponse getOrderById(String id) {
-        OrderEntity entity = orderRepository.findById(id)
+    public OrderResponse obtenerOrdenPorId(String id) {
+
+        OrderEntity entidad = repositorioOrden.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
 
-        return OrderMapper.toResponse(entity);
+        return OrderMapper.aRespuesta(OrderMapper.aDominio(entidad));
     }
 
     @Override
-    public List<OrderResponse> getAllOrders() {
-        return OrderMapper.toResponseList(orderRepository.findAll());
+    public List<OrderResponse> obtenerTodasLasOrdenes() {
+        return repositorioOrden.findAll()
+                .stream()
+                .map(OrderMapper::aDominio)
+                .map(OrderMapper::aRespuesta)
+                .toList();
     }
 
     @Override
-    public OrderResponse cancelOrder(String id) {
-        OrderEntity entity = orderRepository.findById(id)
+    public OrderResponse cancelarOrden(String id) {
+
+        OrderEntity entidad = repositorioOrden.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
 
-        if (entity.getStatus().equals("COMPLETADO")) {
+        if (entidad.getEstado().equals("COMPLETADO")) {
             throw new RuntimeException("No se puede cancelar un pedido completado");
         }
 
-        entity.setStatus("CANCELADO");
-        entity.setUpdatedAt(Instant.now());
+        entidad.setEstado("CANCELADO");
+        entidad.setFechaActualizacion(Instant.now());
 
-        OrderEntity saved = orderRepository.save(entity);
-        return OrderMapper.toResponse(saved);
+        OrderEntity guardada = repositorioOrden.save(entidad);
+
+        return OrderMapper.aRespuesta(OrderMapper.aDominio(guardada));
     }
 
     @Override
-    public void updateOrderStatus(String id, String newStatus) {
-        OrderEntity entity = orderRepository.findById(id)
+    public void actualizarEstadoOrden(String id, String nuevoEstado) {
+
+        OrderEntity entidad = repositorioOrden.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
 
-        entity.setStatus(newStatus);
-        entity.setUpdatedAt(Instant.now());
+        entidad.setEstado(nuevoEstado);
+        entidad.setFechaActualizacion(Instant.now());
 
-        orderRepository.save(entity);
+        repositorioOrden.save(entidad);
     }
 }

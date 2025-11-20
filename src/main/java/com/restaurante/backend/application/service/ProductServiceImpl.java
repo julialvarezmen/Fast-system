@@ -1,10 +1,11 @@
-package com.restaurante.app.application.service;
+package com.restaurante.backend.application.service;
 
-import com.restaurante.app.application.dto.ProductRequest;
-import com.restaurante.app.application.dto.ProductResponse;
-import com.restaurante.app.application.mapper.ProductMapper;
-import com.restaurante.app.infrastructure.persistence.entity.ProductEntity;
-import com.restaurante.app.infrastructure.persistence.repository.ProductRepository;
+import com.restaurante.backend.application.dto.ProductRequest;
+import com.restaurante.backend.application.dto.ProductResponse;
+import com.restaurante.backend.application.mapper.ProductMapper;
+import com.restaurante.backend.domain.model.Product;
+import com.restaurante.backend.infrastructure.persistence.entity.ProductEntity;
+import com.restaurante.backend.infrastructure.persistence.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -13,52 +14,70 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repositorioProducto;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductRepository repositorioProducto) {
+        this.repositorioProducto = repositorioProducto;
     }
 
     @Override
-    public ProductResponse createProduct(ProductRequest request) {
-        ProductEntity entity = ProductMapper.toEntity(request);
-        ProductEntity saved = productRepository.save(entity);
-        return ProductMapper.toResponse(saved);
+    public ProductResponse crearProducto(ProductRequest request) {
+        // DTO → Domain
+        Product productoDominio = ProductMapper.toDomain(request);
+
+        // Domain → Entity
+        ProductEntity entidad = ProductMapper.toEntity(productoDominio);
+
+        // Guardar Entity
+        ProductEntity entidadGuardada = repositorioProducto.save(entidad);
+
+        // Entity → Domain
+        Product productoGuardado = ProductMapper.toDomain(entidadGuardada);
+
+        // Domain → Response DTO
+        return ProductMapper.toResponse(productoGuardado);
     }
 
     @Override
-    public ProductResponse updateProduct(String id, ProductRequest request) {
-        ProductEntity entity = productRepository.findById(id)
+    public ProductResponse actualizarProducto(String id, ProductRequest request) {
+        ProductEntity entidad = repositorioProducto.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        ProductMapper.updateEntity(entity, request);
-        entity.setUpdatedAt(Instant.now());
+        ProductMapper.updateEntity(entidad, request); // actualizar campos desde DTO
+        entidad.setFechaActualizacion(Instant.now());
 
-        ProductEntity saved = productRepository.save(entity);
-        return ProductMapper.toResponse(saved);
+        ProductEntity entidadGuardada = repositorioProducto.save(entidad);
+        Product productoGuardado = ProductMapper.toDomain(entidadGuardada);
+
+        return ProductMapper.toResponse(productoGuardado);
     }
 
     @Override
-    public ProductResponse getProductById(String id) {
-        ProductEntity entity = productRepository.findById(id)
+    public ProductResponse obtenerProductoPorId(String id) {
+        ProductEntity entidad = repositorioProducto.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        return ProductMapper.toResponse(entity);
+        Product productoDominio = ProductMapper.toDomain(entidad);
+        return ProductMapper.toResponse(productoDominio);
     }
 
     @Override
-    public List<ProductResponse> getAllProducts() {
-        return ProductMapper.toResponseList(productRepository.findAll());
+    public List<ProductResponse> obtenerTodosLosProductos() {
+        List<ProductEntity> entidades = repositorioProducto.findAll();
+        List<Product> productos = entidades.stream()
+                .map(ProductMapper::toDomain)
+                .toList();
+        return ProductMapper.toResponseList(productos);
     }
 
     @Override
-    public void disableProduct(String id) {
-        ProductEntity entity = productRepository.findById(id)
+    public void deshabilitarProducto(String id) {
+        ProductEntity entidad = repositorioProducto.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        entity.setActive(false);
-        entity.setUpdatedAt(Instant.now());
+        entidad.setActivo(false);
+        entidad.setFechaActualizacion(Instant.now());
 
-        productRepository.save(entity);
+        repositorioProducto.save(entidad);
     }
 }

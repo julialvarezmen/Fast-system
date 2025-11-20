@@ -1,65 +1,34 @@
-package com.restaurante.app.application.dto;
+package com.restaurante.backend.application.dto;
 
-import java.math.BigDecimal;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
+@Schema(name = "OrdenRequest", description = "Datos para crear una orden")
 public class OrderRequest {
-
-    private String customerName;
-    private String customerPhone;
-    private String address;
-    private String neighborhood;
-    private String paymentMethod; // EFECTIVO | DATAFONO
-
+    @Schema(description = "Nombre del cliente", example = "Juan Pérez")
+    private String nombreCliente;
+    @Schema(description = "Teléfono del cliente", example = "3001234567")
+    private String telefonoCliente;
+    @Schema(description = "Dirección de entrega", example = "Calle 123 #45-67")
+    private String direccion;
+    @Schema(description = "Barrio de entrega", example = "Laureles")
+    private String barrio;
+    @Schema(description = "Método de pago", example = "EFECTIVO")
+    private String metodoPago;
+    @Schema(description = "Lista de ítems de la orden")
     private List<OrderItemRequest> items;
 
-    // Getters y Setters
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public List<OrderItemRequest> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItemRequest> items) {
-        this.items = items;
-    }
+    // Getters y Setters en español
+    public String getNombreCliente() { return nombreCliente; }
+    public void setNombreCliente(String nombreCliente) { this.nombreCliente = nombreCliente; }
+    public String getTelefonoCliente() { return telefonoCliente; }
+    public void setTelefonoCliente(String telefonoCliente) { this.telefonoCliente = telefonoCliente; }
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public String getBarrio() { return barrio; }
+    public void setBarrio(String barrio) { this.barrio = barrio; }
+    public String getMetodoPago() { return metodoPago; }
+    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
+    public List<OrderItemRequest> getItems() { return items; }
+    public void setItems(List<OrderItemRequest> items) { this.items = items; }
 }

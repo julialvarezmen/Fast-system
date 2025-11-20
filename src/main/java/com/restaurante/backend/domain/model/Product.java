@@ -1,35 +1,33 @@
-package com.restaurante.app.domain.model;
+package com.restaurante.backend.domain.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
 public class Product {
-
     private String id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private String imageUrl;
-    private boolean active;
-
-    private Instant createdAt;
-    private Instant updatedAt;
+    private String nombre;
+    private String descripcion;
+    private BigDecimal precio;
+    private String imagenUrl;
+    private boolean activo;
+    private Instant fechaCreacion;
+    private Instant fechaActualizacion;
 
     public Product() {}
 
-    public Product(String id, String name, String description, BigDecimal price, String imageUrl,
-                   boolean active, Instant createdAt, Instant updatedAt) {
+    public Product(String id, String nombre, String descripcion, BigDecimal precio, String imagenUrl,
+                   boolean activo, Instant fechaCreacion, Instant fechaActualizacion) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagenUrl = imagenUrl;
+        this.activo = activo;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacion = fechaActualizacion;
     }
 
-    // Getters y Setters
+    // Getters y Setters en español
 
     public String getId() {
         return id;
@@ -39,59 +37,59 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPrecio() {
+        return precio;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImagenUrl() {
+        return imagenUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
+    public Instant getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setFechaCreacion(Instant fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
+    public Instant getFechaActualizacion() {
+        return fechaActualizacion;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setFechaActualizacion(Instant fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }

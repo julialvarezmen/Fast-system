@@ -1,4 +1,4 @@
-package com.restaurante.app.infrastructure.config;
+package com.restaurante.backend.infrastructure.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;

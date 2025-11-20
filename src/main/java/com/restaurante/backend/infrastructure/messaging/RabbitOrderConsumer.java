@@ -1,6 +1,6 @@
-package com.restaurante.app.infrastructure.messaging;
+package com.restaurante.backend.infrastructure.messaging;
 
-import com.restaurante.app.application.service.OrderService;
+import com.restaurante.backend.application.service.OrderService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 

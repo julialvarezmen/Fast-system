@@ -1,6 +1,7 @@
-package com.restaurante.app.infrastructure.messaging;
+package com.restaurante.backend.infrastructure.messaging;
 
-import com.restaurante.app.infrastructure.persistence.entity.OrderEntity;
+import com.restaurante.backend.domain.model.Order;
+import com.restaurante.backend.infrastructure.persistence.entity.OrderEntity;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class RabbitOrderPublisher {
     }
 
     // Enviar pedido al worker
-    public void sendOrder(OrderEntity order) {
+    public void sendOrder(Order order) {
         rabbitTemplate.convertAndSend(
                 RabbitConfig.ORDER_EXCHANGE,
                 RabbitConfig.ORDER_CREATED_ROUTING_KEY,
