@@ -1,0 +1,173 @@
+/* === Header === */
+.pm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.pm-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.pm-button {
+  background: #ff7a1a;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.pm-button:hover {
+  opacity: 0.9;
+}
+
+/* === Grid de productos === */
+.pm-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* === Tarjeta === */
+.pm-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.pm-image-box {
+  width: 100%;
+  height: 160px;
+  background: #f6f6f6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.pm-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pm-card-title {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.pm-card-desc {
+  font-size: 13px;
+  color: #777;
+  margin: 5px 0 12px;
+}
+
+/* Footer card */
+.pm-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pm-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff7a1a;
+}
+
+.pm-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pm-edit,
+.pm-delete {
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+}
+
+.pm-edit {
+  background: #eee;
+}
+
+.pm-delete {
+  background: #ffe5e5;
+  color: #c62828;
+}
+
+/* === Modal === */
+.pm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pm-modal {
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.pm-modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.pm-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.pm-label input,
+.pm-label textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+}
+
+/* Botones modal */
+.pm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.pm-cancel {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #eee;
+  cursor: pointer;
+  border: none;
+}
+
+.pm-submit {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #ff7a1a;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.pm-submit:hover {
+  opacity: 0.9;
+}

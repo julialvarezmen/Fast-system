@@ -1,0 +1,121 @@
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.orders-header h2 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.orders-refresh {
+  padding: 8px 14px;
+  background: #ff7b00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.orders-refresh:hover {
+  background: #e26c00;
+}
+
+.orders-loading {
+  text-align: center;
+  font-size: 18px;
+  padding: 30px;
+  color: #666;
+}
+
+.orders-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.order-card {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.order-status.pendiente {
+  background: #fff0b3;
+  color: #a37d00;
+}
+
+.order-status.entregado {
+  background: #c5ffbf;
+  color: #2b8a24;
+}
+
+.order-status.cancelado {
+  background: #ffbcbc;
+  color: #b30000;
+}
+
+.order-body {
+  font-size: 14px;
+  color: #444;
+}
+
+.order-products {
+  margin-top: 4px;
+  list-style: inside disc;
+  padding-left: 10px;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.order-btn {
+  flex: 1;
+  margin: 0 4px;
+  padding: 8px 4px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.order-btn.pending {
+  background: #fff4c2;
+  color: #9a7b00;
+}
+
+.order-btn.delivered {
+  background: #ccffd0;
+  color: #207a1e;
+}
+
+.order-btn.canceled {
+  background: #ffd0d0;
+  color: #a80000;
+}
+
+.order-btn:hover {
+  opacity: 0.85;
+}

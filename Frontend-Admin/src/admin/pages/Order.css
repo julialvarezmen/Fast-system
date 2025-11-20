@@ -1,0 +1,59 @@
+.order-card {
+  background: #ffffff;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.order-info p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Badge colores */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-badge.pendiente {
+  background-color: #d4a017; /* Amarillo */
+}
+
+.status-badge.entregado {
+  background-color: #28a745; /* Verde */
+}
+
+.status-badge.cancelado {
+  background-color: #dc3545; /* Rojo */
+}
+
+/* Selector estilo */
+.order-select {
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  background: #fff;
+}
