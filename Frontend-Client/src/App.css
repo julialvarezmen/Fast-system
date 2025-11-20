@@ -1,0 +1,21 @@
+.site-header{
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  color:white;
+  padding:12px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white}
+.brand-logo{width:56px;height:56px;border-radius:12px;background:#fff;padding:6px;object-fit:contain}
+.brand-text{font-weight:800;font-size:20px}
+.nav{display:flex;gap:20px;align-items:center}
+.nav-link{color:white;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;transition:background var(--transition)}
+.nav-link:hover{background:rgba(255,255,255,0.12)}
+.main{padding:32px 0}
+.site-footer{background:#111;color:white;padding:18px 0;text-align:center;margin-top:40px}
+@media(max-width:720px){
+  .nav{display:none}
+}

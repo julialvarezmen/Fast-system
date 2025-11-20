@@ -1,0 +1,6 @@
+.order-card{ background:var(--white); padding:12px; border-radius:12px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px }
+.order-top{ display:flex; justify-content:space-between; align-items:center }
+.order-date{ color:var(--muted); font-weight:700 }
+.order-status{ color:white; padding:6px 10px; border-radius:999px; font-weight:800 }
+.order-body{ display:flex; justify-content:space-between; align-items:center }
+.order-total{ font-weight:900; color:var(--orange-dark) }
