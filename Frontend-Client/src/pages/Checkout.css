@@ -1,0 +1,8 @@
+.checkout-section{ background:var(--white); padding:28px; border-radius:20px; box-shadow:var(--shadow); margin:28px auto; max-width:780px }
+.checkout-section h1{ color:var(--orange-dark); text-align:center; margin-bottom:12px }
+.checkout-form{ display:grid; gap:12px }
+.checkout-form label{ display:flex; flex-direction:column; font-weight:700; gap:6px }
+.checkout-form input, .checkout-form select{ padding:10px 12px; border-radius:12px; border:1px solid #efefef }
+.checkout-summary{ display:flex; justify-content:space-between; margin-top:6px; font-weight:800 }
+.checkout-send-btn{ background:var(--orange); color:white; padding:12px; border-radius:16px; border:none; font-weight:900; cursor:pointer }
+.checkout-send-btn:disabled{ opacity:0.6; cursor:not-allowed }

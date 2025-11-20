@@ -1,0 +1,8 @@
+.home-section{ padding:20px 0 }
+.hero{ background:linear-gradient(135deg,var(--orange),var(--orange-dark)); color:white; border-radius:20px; padding:36px; margin-bottom:28px; box-shadow:var(--shadow) }
+.hero-inner{ max-width:980px; margin:0 auto; text-align:center }
+.hero h1{ font-size:2.6rem; margin:0; font-weight:900; letter-spacing:-0.5px }
+.hero h1 span{ color:#fff }
+.hero p{ margin-top:10px; color:rgba(255,255,255,0.95); font-size:1.05rem }
+.products-grid{ display:flex; gap:22px; flex-wrap:wrap; justify-content:center }
+@media(max-width:720px){ .hero{ padding:26px } .hero h1{ font-size:1.7rem } .products-grid{ gap:12px } }
